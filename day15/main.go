@@ -19,8 +19,10 @@ func getInput() (valueGenA, valueGenB int) {
 	var values []int
 	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
+
 	for scanner.Scan() {
 		row := scanner.Text()
 		splitedRow := strings.Split(row, " ")

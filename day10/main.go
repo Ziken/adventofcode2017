@@ -14,29 +14,27 @@ func check (e error) {
 		panic(e)
 	}
 }
-func getInput() []int {
-	input := make([]int, 0)
-	dat, err := ioutil.ReadFile(INPUT_FILE)
+func getInput() (input []int) {
+	bytes, err := ioutil.ReadFile(INPUT_FILE)
 	check(err)
-	splittedRow := strings.Split(string(dat), ",")
+	splittedRow := strings.Split(string(bytes), ",")
 	for _, val := range splittedRow {
 		n, errAtoi := strconv.Atoi(val)
 		check(errAtoi);
 		input = append(input, n)
 	}
-	return input
+	return
 }
-func getInputAsASCII() []int {
-	input := make([]int, 0)
-	dat, err := ioutil.ReadFile(INPUT_FILE)
+func getInputAsASCII() (input []int) {
+	bytes, err := ioutil.ReadFile(INPUT_FILE)
 	check(err)
-	inputAsByte := []byte(dat)
+	inputAsByte := []byte(bytes)
 
 	for _, b := range inputAsByte {
 		input = append(input, int(b))
 	}
 
-	return input
+	return
 }
 func fillList(list * []int) {
 	listCap := cap(*list)
@@ -74,23 +72,26 @@ func applyList(list []int, cp, size int) {
 		cp++
 	}
 }
-func getDenseHash(list []int) []int{
-	//listSize := len(list)
-	var denseHash []int
+func getDenseHash(list []int) (denseHash string) {
 	for i := 0; i < 16; i++ {
 		hashNum := list[i*16]
 		for j := i*16+1; j < (i+1)*16; j++ {
 			hashNum = xorTwoNums(hashNum, list[j])
 		}
-		denseHash = append(denseHash, hashNum)
+		hexNum := strconv.FormatInt(int64(hashNum), 16)
+		if len(hexNum) <= 1 {
+			denseHash += "0" + string(hexNum)
+		} else {
+			denseHash += hexNum
+		}
 	}
+
 	return denseHash
 }
-func xorTwoNums(n1, n2 int) int{
+func xorTwoNums(n1, n2 int) (result int) {
 	if n2 > n1 {
 		n1,n2 = n2,n1
 	}
-	var result int
 	var binN2 string
 	power := 1
 	binN1 := strconv.FormatInt(int64(n1),2)
@@ -113,8 +114,6 @@ func xorTwoNums(n1, n2 int) int{
 func answerPart1 (in []int) {
 	listSize := 256
 	var currentPos, skipSize int
-	//currentPos := 0
-	//skipSize := 0
 	list := make([]int, 0, listSize)
 	fillList(&list)
 
@@ -138,8 +137,7 @@ func answerPart2(in []int) {
 			skipSize++
 		}
 	}
-	fmt.Printf("Answer part 2: %x", getDenseHash(list))
-
+	fmt.Println("Answer part 2:", getDenseHash(list))
 }
 
 func main() {

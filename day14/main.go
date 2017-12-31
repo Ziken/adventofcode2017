@@ -14,13 +14,12 @@ func check (e error) {
 	}
 }
 func getInputAsASCII() []int {
-	dat, err := ioutil.ReadFile(INPUT_FILE)
+	bytes, err := ioutil.ReadFile(INPUT_FILE)
 	check(err)
 
-	return convertToAscii(dat)
+	return convertToAscii(bytes)
 }
-func convertToAscii(dat []byte) []int {
-	var input []int
+func convertToAscii(dat []byte) (input []int) {
 	inputAsByte := dat
 
 	for _, b := range inputAsByte {
@@ -64,8 +63,8 @@ func applyList(list []int, cp, size int) {
 		cp++
 	}
 }
-func getDenseHash(list []int) string{
-	denseHash := ""
+func getDenseHash(list []int) (denseHash string) {
+
 	for i := 0; i < 16; i++ {
 		hashNum := list[i*16]
 		for j := i*16+1; j < (i+1)*16; j++ {

@@ -17,8 +17,10 @@ func check(e error) {
 func getInput() (input [][]string) {
 	file, err := os.Open(INPUT_FILE)
 	check(err)
-
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
+	check(scanner.Err())
+
 	for scanner.Scan() {
 		row := scanner.Text()
 		input = append(input, strings.Split(row, " "))

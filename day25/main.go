@@ -27,6 +27,7 @@ func getInput() (int, int, []TuringBluePrint) {
 
 	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
 

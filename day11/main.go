@@ -13,11 +13,10 @@ func check (e error) {
 		panic(e)
 	}
 }
-func getInput() []string {
-	input := make([]string, 0)
-	dat, err := ioutil.ReadFile(INPUT_FILE)
+func getInput() (input []string) {
+	bytes, err := ioutil.ReadFile(INPUT_FILE)
 	check(err)
-	input = append(input, strings.Split(string(dat), ",")...)
+	input = append(input, strings.Split(string(bytes), ",")...)
 	return input
 }
 // https://www.redblobgames.com/grids/hexagons/
@@ -26,14 +25,13 @@ func answerPart1 (input []string) {
 	for _, direction := range input {
 		// cannot do it directly...
 		a,b,c := preciseCoordinateBy(direction)
-		x+=a
-		y+=b
-		z+=c
+		x += a
+		y += b
+		z += c
 	}
 	fmt.Println("Distance:", (math.Abs(x)+math.Abs(y)+math.Abs(z))/2)
 }
 func preciseCoordinateBy(direction string) (x,y,z float64)  {
-	//var x,y,z float64
 	switch direction {
 		case "n":
 		y += 1

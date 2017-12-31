@@ -15,8 +15,8 @@ func check (e error) {
 	}
 }
 func getInput() []string {
-	dat, err := ioutil.ReadFile(INPUT_FILE)
-	input := strings.Split(string(dat), ",")
+	bytes, err := ioutil.ReadFile(INPUT_FILE)
+	input := strings.Split(string(bytes), ",")
 	check(err)
 	return input
 }

@@ -20,8 +20,10 @@ func getInput() map[int]int {
 
 	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
+
 	for scanner.Scan() {
 		row := scanner.Text()
 		splitedRow := strings.Split(row, ": ")
@@ -43,7 +45,7 @@ func answerPart1 (in map[int]int) {
 			answer += layer*r
 		}
 	}
-	fmt.Println("Part 1:", answer)
+	fmt.Println("Answer part 1:", answer)
 }
 func answerPart2 (in map[int]int) {
 	delay := 0
@@ -60,7 +62,7 @@ func answerPart2 (in map[int]int) {
 		}
 		delay++
 	}
-	fmt.Println("Part 2:", delay)
+	fmt.Println("Answer part 2:", delay)
 
 }
 func main () {

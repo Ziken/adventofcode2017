@@ -17,13 +17,13 @@ func check (e error) {
 	}
 }
 func getInput() ([]map[string]int, []map[string]int, []map[string]int) {
-
-	file, errFile := os.Open(INPUT_FILE)
 	position     :=  make([]map[string]int, 0)
 	velocity 	 :=  make([]map[string]int, 0)
 	acceleration :=  make([]map[string]int, 0)
 
+	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
 

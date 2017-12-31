@@ -6,7 +6,8 @@ import (
 	"strings"
 	"strconv"
 	"fmt"
-	"math"
+	//"math"
+	"sort"
 )
 
 const INPUT_FILE = "input.txt"
@@ -21,6 +22,7 @@ func getInput() [][]int {
 	indexRow := 0
 	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
 	for scanner.Scan() {
@@ -42,18 +44,9 @@ func answerPart1(numbers [][]int) {
 	var checksum int
 
 	for _,row := range numbers {
-		max := 0
-		min := math.MaxInt32
-		for _, n := range row {
-			if n > max {
-				max = n
-			} else if min > n {
-				min = n
-			}
-		}
-		checksum += max - min
+		sort.Ints(row)
+		checksum += row[len(row)-1] - row[0]
 	}
-
 	fmt.Println("Answer part 1:", checksum)
 }
 func answerPart2(numbers [][]int) {
@@ -72,7 +65,6 @@ func answerPart2(numbers [][]int) {
 		}
 
 	}
-
 	fmt.Println("Answer part 2:", sum)
 }
 func main() {

@@ -15,9 +15,9 @@ func check (err error) {
 	}
 }
 func getInput () int {
-	content, err  := ioutil.ReadFile(INPUT_FILE)
+	bytes, err  := ioutil.ReadFile(INPUT_FILE)
 	check(err)
-	n, errAtoi := strconv.Atoi(string(content))
+	n, errAtoi := strconv.Atoi(string(bytes))
 	check(errAtoi)
 
 	return n

@@ -14,11 +14,11 @@ func check (e error) {
 		panic(e)
 	}
 }
-func getInput() [][]int {
-	input := make([][]int,0)
+func getInput() (input [][]int) {
 	indexRow := 0
 	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
 	for scanner.Scan() {
@@ -51,7 +51,7 @@ func answerPart1 (input [][]int) {
 			sumConnectedTo0++
 		}
 	}
-	fmt.Println("Amount of nodes contain program ID0:", sumConnectedTo0)
+	fmt.Println("Answer part 1:", sumConnectedTo0)
 }
 func dfs(s int, isVisited []bool, input [][]int) {
 	isVisited[s] = true
@@ -71,7 +71,7 @@ func answerPart2(input [][]int) {
 			dfs(i, isVisited, input)
 		}
 	}
-	fmt.Println("Amount of groups:", amountOfGroups)
+	fmt.Println("Answer part 2:", amountOfGroups)
 }
 func main() {
 	in := getInput()

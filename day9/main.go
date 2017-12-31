@@ -12,9 +12,9 @@ func check(e error) {
 	}
 }
 func getInput() string {
-	input, err := ioutil.ReadFile(INPUT_FILE)
+	bytes, err := ioutil.ReadFile(INPUT_FILE)
 	check(err)
-	return string(input)
+	return string(bytes)
 }
 func answerPart1And2(streamOfCharacters string) {
 	isGarbageOpen := false

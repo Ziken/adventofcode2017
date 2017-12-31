@@ -21,6 +21,7 @@ func getInput() (in [][]byte) {
 
 	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
 	for scanner.Scan() {

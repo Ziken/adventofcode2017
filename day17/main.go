@@ -13,9 +13,9 @@ func check (e error) {
 	}
 }
 func getInput() int {
-	dat, err := ioutil.ReadFile(INPUT_FILE)
+	bytes, err := ioutil.ReadFile(INPUT_FILE)
 	check(err)
-	in, errAtoi := strconv.Atoi(string(dat))
+	in, errAtoi := strconv.Atoi(string(bytes))
 	check(errAtoi)
 	return in
 }
@@ -57,7 +57,6 @@ func answerPart2 (steps int) {
 	amount := 50000000
 
 	for i := 0; i < amount; i++ {
-
 		currentPos = (currentPos + steps) % buffLen
 		buffLen++
 		currentVal++
@@ -69,8 +68,7 @@ func answerPart2 (steps int) {
 	fmt.Println("Answer part 2:", answer)
 }
 func main() {
-	//in := getInput()
-	in := 355
+	in := getInput()
 	answerPart1(in)
 	answerPart2(in)
 }
@@ -80,7 +78,4 @@ func main() {
 [0 891 886 100 270 506				1000
 [0 7027 4647 1731 4295 2096 3372	10000
 [0 77204 83766 55086 49921			100000
-
-
-
  */

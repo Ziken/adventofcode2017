@@ -15,9 +15,9 @@ func check (e error) {
 	}
 }
 func getInput() (in []int) {
-	dat, err := ioutil.ReadFile(INPUT_FILE)
+	bytes, err := ioutil.ReadFile(INPUT_FILE)
 	check(err)
-	intsAsStr := strings.Split(string(dat), "\t")
+	intsAsStr := strings.Split(string(bytes), "\t")
 	for _, n := range intsAsStr {
 		num, errAtoi := strconv.Atoi(n)
 		check(errAtoi)

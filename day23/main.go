@@ -19,6 +19,7 @@ func getInput() map[int][]string {
 	in := make(map[int][]string)
 	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
 	indexRow := 0

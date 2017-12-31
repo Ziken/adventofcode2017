@@ -18,6 +18,7 @@ func getInput() (in [][]string) {
 
 	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
 	indexRow := 0
@@ -28,7 +29,7 @@ func getInput() (in [][]string) {
 	}
 	return in
 }
-func answerPart1 (path [][]string) {
+func answerPart1And2(path [][]string) {
 	var row, column int
 	var stepVert, stepHoriz int
 	var stepsAmount int
@@ -127,8 +128,5 @@ func isLetter(sign string) bool {
 }
 func main() {
 	in := getInput()
-	//for _,v := range in {
-	//	fmt.Println(v)
-	//}
-	answerPart1(in)
+	answerPart1And2(in)
 }

@@ -19,6 +19,7 @@ func getInput() map[int][]string {
 	in := make(map[int][]string)
 	file, errFile := os.Open(INPUT_FILE)
 	check(errFile)
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	check(scanner.Err())
 	indexRow := 0
@@ -175,5 +176,3 @@ func main() {
 	answerPart1(in)
 	answerPart2(in)
 }
-// 1667745 to high
-// 254 to low
